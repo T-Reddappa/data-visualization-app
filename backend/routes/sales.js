@@ -23,10 +23,12 @@ router.get("/", async (req, res) => {
       case "quarterly":
         groupFormat = {
           $concat: [
-            { $substr: [{ $year: "$created_at" }, 0, 4] },
+            { $substr: [{ $year: "$created_at_date" }, 0, 4] },
             "-Q",
             {
-              $toString: { $ceil: { $divide: [{ $month: "$created_at" }, 3] } },
+              $toString: {
+                $ceil: { $divide: [{ $month: "$created_at_date" }, 3] },
+              },
             },
           ],
         };
